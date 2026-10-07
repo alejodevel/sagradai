@@ -1,0 +1,139 @@
+/* ==========================================================================
+   SAGRADA — tokens
+   Paleta aprobada: Black, White, Milano Red, Cherry, Red Velvet, Champagne.
+   Los "temas" solo reordenan cómo se usan esos 6 colores (probador de paleta).
+   ========================================================================== */
+@layer reset, tokens, base, layout, components, pages, utilities;
+
+@layer tokens {
+  /* Garet Book se declara como 400 y se prohíbe sintetizar negrita: un solo peso en todo el sitio */
+  @font-face {
+    font-family: "Garet";
+    src: url("assets/fonts/garet-book.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  /* Reserva: usos muy puntuales (precio destacado, etiqueta). No se usa por defecto. */
+  @font-face {
+    font-family: "Garet Heavy";
+    src: url("assets/fonts/garet-heavy.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  /* Lemas de marca: solo se descargan cuando aparece el texto (font-display optional evita saltos) */
+  @font-face {
+    font-family: "Wreck";
+    src: url("assets/fonts/wreck-script.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Soft Boheme";
+    src: url("assets/fonts/soft-boheme-regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  /* Fallback con métricas ajustadas (evita el salto de layout mientras carga Garet) */
+  @font-face {
+    font-family: "Garet Fallback";
+    src: local("Arial"), local("Helvetica Neue"), local("Liberation Sans");
+    size-adjust: 113%;
+    ascent-override: 94.6%;
+    descent-override: 33.6%;
+    line-gap-override: 0%;
+  }
+
+  :root {
+    /* Paleta */
+    --c-black: #000000;
+    --c-white: #ffffff;
+    --c-red: #b80b0c;        /* Milano Red */
+    --c-cherry: #7f0f1d;     /* Cherry */
+    --c-velvet: #520e0d;     /* Red Velvet */
+    --c-champagne: #e5ded6;  /* Champagne */
+
+    /* Roles (tema por defecto: "noir" = blanco y negro + rojo) */
+    --bg: var(--c-white);
+    --fg: var(--c-black);
+    --muted: #5d5a57;                                   /* 7.0:1 sobre blanco */
+    --line: color-mix(in srgb, var(--c-black) 14%, transparent);
+    --soft: color-mix(in srgb, var(--c-champagne) 38%, var(--c-white));  /* superficies suaves */
+    --accent: var(--c-red);          /* texto/íconos de acento sobre fondo claro */
+    --band: var(--c-black);          /* bandas oscuras */
+    --band-fg: var(--c-white);
+    --band-accent: var(--c-champagne);
+    --motto-on-light: var(--c-red);  /* Wreck / Soft sobre claro */
+    --motto-on-dark: var(--c-champagne);
+    --sold: var(--c-velvet);
+
+    /* Tipografía */
+    --font: "Garet", "Garet Fallback", Arial, "Helvetica Neue", sans-serif;
+    --font-heavy: "Garet Heavy", "Garet Fallback", Arial, sans-serif;
+    --font-script: "Wreck", "Brush Script MT", cursive;
+    --font-display: "Soft Boheme", Georgia, serif;
+
+    --fs-xs: 0.75rem;     /* 12 */
+    --fs-sm: 0.8125rem;   /* 13 */
+    --fs-base: 0.9375rem; /* 15 */
+    --fs-md: 1.0625rem;   /* 17 */
+    --fs-lg: clamp(1.25rem, 1.05rem + 0.9vw, 1.6rem);
+    --fs-xl: clamp(1.6rem, 1.2rem + 1.9vw, 2.6rem);
+    --fs-2xl: clamp(2rem, 1.2rem + 3.8vw, 4.2rem);
+    --fs-hero: clamp(2.15rem, 1.1rem + 5.4vw, 5.6rem);
+
+    --tr-label: 0.18em;   /* etiquetas pequeñas en mayúsculas */
+    --tr-title: 0.07em;   /* títulos grandes en mayúsculas */
+
+    /* Espacios */
+    --gutter: clamp(16px, 4.2vw, 56px);
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 72px; --sp-9: clamp(64px, 9vw, 128px);
+    --maxw: 1440px;
+    --radius: 0;           /* esquinas rectas: marca sobria */
+    --ease: cubic-bezier(.2, .7, .2, 1);
+    --header-h: 64px;
+    --announce-h: 36px;
+  }
+
+  /* ---- Temas del probador de paleta (?theme=...) ---- */
+  :root[data-theme="champan"] {
+    --bg: color-mix(in srgb, var(--c-champagne) 42%, var(--c-white));
+    --soft: color-mix(in srgb, var(--c-champagne) 80%, var(--c-white));
+  }
+  :root[data-theme="cereza"] {
+    --accent: var(--c-cherry);
+    --band: var(--c-cherry);
+    --band-fg: var(--c-champagne);
+    --band-accent: var(--c-white);
+    --motto-on-light: var(--c-cherry);
+    --sold: var(--c-cherry);
+  }
+  :root[data-theme="terciopelo"] {
+    --accent: var(--c-red);
+    --band: var(--c-velvet);
+    --band-fg: var(--c-champagne);
+    --band-accent: var(--c-white);
+    --motto-on-light: var(--c-red);
+    --sold: var(--c-velvet);
+  }
+  :root[data-theme="rojo"] {
+    --accent: var(--c-red);
+    --band: var(--c-red);
+    --band-fg: var(--c-white);
+    --band-accent: var(--c-champagne);
+    --motto-on-dark: var(--c-champagne);
+  }
+
+  @media (min-width: 900px) {
+    :root { --header-h: 76px; --announce-h: 38px; }
+  }
+}
+
+@layer tokens {
+  /* Rojo vivo de los archivos de marca (#D70304): solo para logos/elementos sobre fondos oscuros
+     (negro / Red Velvet), donde el Milano Red aprobado pierde contraste. Confirmar con Valeria. */
+  :root { --c-red-vivo: #d70304; }
+}

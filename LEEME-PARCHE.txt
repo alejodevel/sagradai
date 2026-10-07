@@ -1,0 +1,6 @@
+1. Copia estas carpetas/archivos sobre tu repo respetando la estructura.
+2. Borra del repo:
+   - src/js/lab.js  y  docs/js/lab.js
+   - docs/assets/brand/logos/*.svg  y  docs/assets/brand/isotipo/*.svg
+   - docs/assets/brand/elementos/curated-pieces-*.svg  y  vintage-vibes-*.svg
+3. Corre: node build.mjs   (regenera todo docs/)
