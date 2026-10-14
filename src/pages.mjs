@@ -1,7 +1,7 @@
 import { PRODUCTS, SERVICE, LINES, CATS, PHOTO } from './data/products.mjs';
 import { POSTS } from './data/posts.mjs';
 import { SITE } from './data/site.mjs';
-import { page, card, img, U, srcset, esc, money, brand, logo, motto, ojo, starImg, productUrl, lineName, crumbs, breadcrumbLD, ICON } from './lib.mjs';
+import { page, consent, card, img, U, srcset, esc, money, brand, logo, motto, ojo, starImg, productUrl, lineName, crumbs, breadcrumbLD, ICON } from './lib.mjs';
 
 const unsold = PRODUCTS.filter(p => !p.sold);
 const pick = k => PHOTO[k];
@@ -13,7 +13,7 @@ export function home() {
   const preload = `<link rel="preload" as="image" media="(max-width:799px), (orientation:portrait)" imagesrcset="${srcset(heroM.id, [500, 800, 1100, 1400])}" imagesizes="100vw" fetchpriority="high">
 <link rel="preload" as="image" media="(min-width:800px) and (orientation:landscape)" imagesrcset="${srcset(heroD.id, [1000, 1400, 1900, 2400])}" imagesizes="100vw" fetchpriority="high">`;
   const tiles = [
-    ['vintage', 'abrigoCamel', 'Vintage', LINES.vintage.short, 'tienda-vintage.html'],
+    ['vintage', 'abrigoCamel', 'Vintage & Pre-loved', LINES.vintage.short, 'tienda-vintage.html'],
     ['lujo', 'vestidoBordo', 'Lujo', LINES['lujo'].short, 'tienda-lujo.html'],
     ['upcycling', 'taller3', 'Upcycling', LINES.upcycling.short, 'tienda-upcycling.html'],
   ].map(([k, ph, t, d, h]) => `<a class="tile${k === 'upcycling' ? ' tile--up' : ''}" href="${h}" data-reveal>
@@ -21,14 +21,10 @@ export function home() {
     ${k === 'upcycling' ? '<span class="tag">Sastrería</span>' : ''}
     <div class="tile__txt"><h3>${t}</h3><p>${d}</p><span class="arrow-link" style="border:0;padding:0">Explorar</span></div></a>`).join('');
 
-  const cats = [['abrigos', 'abrigoCamel'], ['chaquetas', 'cueroNegro'], ['blazers', 'blazerRojo'], ['tejidos', 'cardiganCrudo'], ['vestidos', 'vestidoBordo'], ['carteras', 'carteraGris']]
-    .map(([c, ph]) => `<a class="tile" href="tienda.html?cat=${c}"><div class="media">${img(pick(ph), { alt: CATS[c], sizes: '(min-width:1200px) 25vw, (min-width:900px) 30vw, 60vw', ws: [320, 480, 640, 900], w: 480, h: 600 })}</div><div class="tile__txt"><h3 style="font-size:1.15rem">${CATS[c]}</h3></div></a>`).join('');
 
-  const news = unsold.slice(0, 8).map((p, i) => card(p, { sizes: '(min-width:1200px) 25vw, (min-width:900px) 29vw, (min-width:600px) 41vw, 74vw' })).join('');
-  const posts = POSTS.slice(0, 3).map(po => postCard(po)).join('');
-  const ig = ['abrigoCamel', 'vestidoRojo', 'tallerHilo', 'cueroNegro', 'perchaMadera', 'carteraGris'].map(k => `<a href="${SITE.igUrl}" target="_blank" rel="noopener" aria-label="Ver en Instagram"><div class="media">${img(pick(k), { alt: '', sizes: '(min-width:800px) 16vw, 33vw', ws: [240, 400, 600], w: 400, h: 400 })}</div></a>`).join('');
-  const bagK = 'Piezas únicas ★ Curaduría real ★ Envíos a todo Chile ★ Vintage ★ Lujo ★ Upcycling ★ Pago seguro con Flow ★ Mide antes de enamorarte ★ ';
-  const mq = (hidden) => `<div class="marquee__group"${hidden ? ' aria-hidden="true"' : ''}>${['Piezas únicas', 'Curaduría real', 'Envíos a todo Chile', 'Vintage · Lujo · Upcycling', 'Pago seguro con Flow'].map(t => `<span>${t}</span>${starImg('rojo-vivo', '')}`).join('')}</div>`;
+  const posts = POSTS.slice(0, 1).map(po => postCard(po)).join('');
+  const bagK = 'Piezas únicas ★ Curaduría real ★ Envíos a todo Chile ★ Vintage & Pre-loved ★ Lujo ★ Upcycling ★ Pago seguro con Flow ★ Mide antes de enamorarte ★ ';
+  const mq = (hidden) => `<div class="marquee__group"${hidden ? ' aria-hidden="true"' : ''}>${['Piezas únicas', 'Curaduría real', 'Envíos a todo Chile', 'Vintage & Pre-loved · Lujo · Upcycling', 'Pago seguro con Flow'].map(t => `<span>${t}</span>${starImg('rojo-vivo', '')}`).join('')}</div>`;
 
   const body = `
 <section class="hero" aria-label="Portada">
@@ -39,7 +35,7 @@ export function home() {
   <div class="hero__in">
     <h1>Ropa con historia, elegida para ti</h1>
     <p>Vintage, lujo y upcycling con ojo de curadora. Una sola pieza de cada una.</p>
-    <div class="btn-row"><a class="btn btn--light" href="tienda.html">Ver lo nuevo</a><a class="btn btn--ghost" href="tienda-upcycling.html">Upcycling</a></div>
+    <div class="btn-row"><a class="btn btn--light btn--sm" href="tienda-vintage.html">Vintage / Pre-loved</a><a class="btn btn--ghost btn--sm" href="tienda-upcycling.html">Sastrería Upcycling</a></div>
   </div>
 </section>
 <div class="marquee" aria-label="Lo que nos define"><div class="marquee__track">${mq(false)}${mq(true)}</div></div>
@@ -49,13 +45,15 @@ export function home() {
   <div class="lines">${tiles}</div>
 </div></section>
 
-<section class="section section--tight" style="padding-top:0"><div class="wrap">
-  <div class="rail-wrap">
-    ${sec({ eyebrow: 'Recién llegadas', title: 'Lo nuevo', href: 'tienda.html', link: 'Ver todo' })}
-    <div class="rail" role="list" aria-label="Piezas nuevas">${news.replace(/<article class="card/g, '<article role="listitem" class="card')}</div>
-    <div class="rail-nav mt-4" style="justify-content:flex-end"><button class="rail-btn" type="button" data-rail="prev" aria-label="Anterior">←</button><button class="rail-btn" type="button" data-rail="next" aria-label="Siguiente">→</button></div>
+<section class="advice" aria-labelledby="adv-h">
+  <div class="media"><div class="iso-ph" style="--iso-bg:var(--c-cherry)"><img src="${brand('isotipo', 'isotipo', 'blanco')}" alt="" width="400" height="400"></div></div>
+  <div class="advice__txt">
+    <span class="label">Servicio</span>
+    <h2 id="adv-h">¿No sabes por dónde empezar?</h2>
+    <p>Una sesión uno a uno para armar tu clóset cápsula, elegir esa pieza especial o combinar mejor lo que ya tienes.</p>
+    <div><a class="btn" href="asesoria-personalizada.html">Reservar asesoría · ${money(SERVICE.price)}</a></div>
   </div>
-</div></section>
+</section>
 
 <section class="section section--soft"><div class="wrap">
   <div class="manifesto" data-reveal>
@@ -75,21 +73,6 @@ export function home() {
   </div>
 </section>
 
-<section class="section"><div class="wrap">
-  ${sec({ eyebrow: 'Explora por prenda', title: 'Todo lo que buscas' })}
-  <div class="rail-wrap"><div class="rail rail--cats">${cats}</div></div>
-</div></section>
-
-<section class="advice" aria-labelledby="adv-h">
-  <div class="media"><div class="iso-ph" style="--iso-bg:var(--c-cherry)"><img src="${brand('isotipo', 'isotipo', 'blanco')}" alt="" width="400" height="400"></div></div>
-  <div class="advice__txt">
-    <span class="label">Servicio</span>
-    <h2 id="adv-h">¿No sabes por dónde empezar?</h2>
-    <p>Una sesión uno a uno para armar tu clóset cápsula, elegir esa pieza especial o combinar mejor lo que ya tienes.</p>
-    <div><a class="btn" href="asesoria-personalizada.html">Reservar asesoría · ${money(SERVICE.price)}</a></div>
-  </div>
-</section>
-
 <section class="band on-dark"><div class="wrap eye-band">
   <div data-reveal><span class="label" style="color:var(--band-accent)">La mirada</span>
     <h2 style="margin-top:14px">Ojo de curadora</h2>
@@ -99,13 +82,26 @@ export function home() {
 </div></section>
 
 <section class="section"><div class="wrap wrap--wide">
-  ${sec({ eyebrow: 'Blog', title: 'Para mirar con calma', href: 'journal.html', link: 'Ver todo' })}
-  <div class="posts posts--3">${posts}</div>
+  ${sec({ eyebrow: 'Blog', title: 'Nuestra mirada sobre la moda', href: 'journal.html', link: 'Ver todo' })}
+  <div class="posts posts--1">${posts}</div>
 </div></section>
 
-<section class="section section--tight" style="padding-top:0"><div class="wrap wrap--wide">
-  <div class="sec-head"><div><span class="label label--accent eyebrow">Instagram</span><h2 class="handle">@${SITE.instagram}</h2></div><a class="arrow-link" href="${SITE.igUrl}" target="_blank" rel="noopener">Seguir</a></div>
-  <div class="ig">${ig}</div>
+<section class="ig-line" aria-label="Instagram y suscripción"><div class="wrap wrap--wide ig-grid">
+  <div class="ig-line__follow">
+    <a class="ig-line__ring" href="${SITE.igUrl}" target="_blank" rel="noopener" aria-label="Instagram de Sagrada"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6"/></svg></a>
+    <div>
+      <span class="eyebrow">Instagram</span>
+      <a class="ig-line__handle" href="${SITE.igUrl}" target="_blank" rel="noopener">@${SITE.instagram}</a>
+      <p>Síguenos para enterarte de nuestros new drops.</p>
+    </div>
+  </div>
+  <div class="ig-line__sub">
+    <span class="eyebrow">Suscríbete</span>
+    <p class="ig-line__lead">Sé la primera en enterarte de nuestras novedades.</p>
+    <form data-demo aria-label="Suscripción" novalidate><label class="sr-only" for="nl-ig">Tu correo</label><input id="nl-ig" type="email" required placeholder="Escribe tu correo" autocomplete="email"><button type="submit">Suscribirme</button></form>
+    <p class="form-ok" data-demo-ok hidden tabindex="-1">Listo. Revisa tu correo para confirmar.</p>
+    ${consent()}
+  </div>
 </div></section>
 
 ${trust()}`;
@@ -143,7 +139,7 @@ export function shop(lineKey) {
     'lujo': ['Lujo', 'Marcas de lujo de siempre, de segunda mano, con cariño y listas para otra vida. Misma calidad, mejor historia.', '<span class="label eyebrow-plain">Curated pieces</span>'],
     upcycling: ['Upcycling', 'Prendas reconstruidas en nuestro taller de sastrería. Cada una sale una sola vez, hecha a mano.', `<span class="label" style="color:var(--band-accent);display:inline-flex;gap:10px;align-items:center">${starImg('rojo-vivo', 'star')} Sastrería</span>`],
   }[lineKey] || [null, 'Vintage, lujo y upcycling en un solo lugar. Filtra por línea, por prenda o mira todo junto.', ''];
-  const tabs = [['Todo', 'tienda.html', null], ['Vintage', 'tienda-vintage.html', 'vintage'], ['Lujo', 'tienda-lujo.html', 'lujo'], ['Upcycling', 'tienda-upcycling.html', 'upcycling']]
+  const tabs = [['Todo', 'tienda.html', null], ['Vintage & Pre-loved', 'tienda-vintage.html', 'vintage'], ['Lujo', 'tienda-lujo.html', 'lujo'], ['Upcycling', 'tienda-upcycling.html', 'upcycling']]
     .map(([t, h, k]) => `<a class="chip${k === 'upcycling' ? ' is-up' : ''}" href="${h}"${(k || null) === (lineKey || null) ? ' aria-current="page"' : ''}>${t}</a>`).join('');
   const chips = `<button class="chip" type="button" data-cat-chip="" aria-pressed="true">Todas</button>` + Object.entries(CATS).filter(([c]) => counts[c]).map(([c, n]) => `<button class="chip" type="button" data-cat-chip="${c}" aria-pressed="false">${CATS[c]}</button>`).join('');
   const catOpts = Object.entries(CATS).filter(([c]) => counts[c]).map(([c, n]) => `<label class="opt"><span>${CATS[c]}<small>(${counts[c]})</small></span><input type="checkbox" name="cat" value="${c}"></label>`).join('');
@@ -264,7 +260,7 @@ export function advice() {
 /* ======================= JOURNAL ======================= */
 export function journal() {
   const body = `<div class="wrap">${crumbs([{ label: 'Inicio', href: 'index.html' }, { label: 'Blog' }])}
-  <header class="page-title"><span class="label label--accent">Blog</span><h1>Para mirar con calma</h1><p class="lead">Guías, historias de taller y trucos para elegir mejor lo que vistes.</p></header>
+  <header class="page-title"><span class="label label--accent">Blog</span><h1>Nuestra mirada sobre la moda</h1><p class="lead">Guías, historias de taller y trucos para elegir mejor lo que vistes.</p></header>
   <div class="posts" style="padding-bottom:var(--sp-9)">${POSTS.map(postCard).join('')}</div></div>`;
   return page({ title: 'Blog', desc: 'Guías de estilo, historias de taller y cómo elegir piezas vintage, lujo y upcycling.', page: 'journal', active: 'journal', body });
 }
@@ -396,4 +392,25 @@ export function notFound() {
   <span class="label label--accent">Error 404</span><h1 style="font-size:var(--fs-xl)">Esta pieza ya no está</h1>
   <p class="lead">O quizás nunca estuvo. Vuelve a la tienda y mira lo que sí hay.</p><a class="btn" href="tienda.html">Ver la tienda</a></div></div>`;
   return page({ title: 'No encontrada', desc: 'Página no encontrada', page: '404', active: '', body });
+}
+
+export function privacy() {
+  const S = [
+    ['1. Quiénes somos', `<p>Sagrada Indumentaria (“Sagrada”, “nosotras”) es una tienda de moda vintage, pre-loved, de lujo y sastrería upcycling con base en Santiago de Chile. Somos la responsable del tratamiento de los datos personales que recibimos a través de este sitio.</p><p>Para cualquier consulta sobre tus datos escríbenos a <a class="link" href="mailto:${SITE.email}">${SITE.email}</a>.</p>`],
+    ['2. Qué datos recopilamos', `<ul><li><b>Suscripción:</b> tu correo electrónico.</li><li><b>Compra:</b> nombre, RUT (necesario para emitir la boleta), correo, teléfono, dirección de despacho y el detalle de tu pedido.</li><li><b>Contacto y asesoría:</b> los datos que nos entregas en el formulario o por correo, como tu nombre, correo y mensaje.</li><li><b>Navegación:</b> datos técnicos básicos (tipo de dispositivo, navegador, páginas visitadas) y la bolsa de compras, que se guarda en tu propio navegador.</li></ul><p>No pedimos ni vemos los datos de tu tarjeta: el pago se realiza directamente en la plataforma de pagos.</p>`],
+    ['3. Para qué los usamos', `<ul><li>Procesar y despachar tu compra, emitir la boleta y atender cambios o devoluciones.</li><li>Responder tus consultas.</li><li>Enviarte novedades y new drops, solo si te suscribiste.</li><li>Cumplir obligaciones legales y tributarias.</li><li>Mejorar el funcionamiento del sitio.</li></ul><p>No usamos tus datos para fines distintos de los que te informamos aquí, ni los vendemos.</p>`],
+    ['4. Por qué podemos tratarlos', `<p>Tratamos tus datos según la Ley N° 19.628 sobre protección de la vida privada y la Ley N° 21.719, que la actualiza, sobre la base de: tu consentimiento (por ejemplo, al suscribirte), la ejecución del contrato de compra y el cumplimiento de obligaciones legales. Puedes retirar tu consentimiento en cualquier momento, sin efecto retroactivo.</p>`],
+    ['5. Con quién los compartimos', `<p>Solo con quienes necesitamos para operar: la plataforma de pagos (Flow), servicios de despacho, proveedores de alojamiento del sitio y de envío de correos, y el servicio de facturación electrónica. Les entregamos únicamente los datos necesarios para su función. También podremos entregarlos si una autoridad competente nos lo exige conforme a la ley.</p><p>Si algún proveedor está fuera de Chile, procuramos que ofrezca garantías adecuadas de protección.</p>`],
+    ['6. Cuánto tiempo los conservamos', `<ul><li>Datos de compra: el tiempo que exijan las normas tributarias y de consumo.</li><li>Suscripción: hasta que te des de baja.</li><li>Consultas: el tiempo necesario para atenderlas.</li></ul><p>Pasado ese plazo, los eliminamos o anonimizamos.</p>`],
+    ['7. Tus derechos', `<p>Puedes solicitarnos en cualquier momento:</p><ul><li><b>Acceso:</b> saber qué datos tuyos tenemos y cómo los usamos.</li><li><b>Rectificación:</b> corregir datos inexactos o incompletos.</li><li><b>Supresión:</b> que eliminemos tus datos cuando corresponda.</li><li><b>Oposición:</b> que dejemos de tratarlos para un fin determinado, como el envío de novedades.</li><li><b>Portabilidad:</b> recibir tus datos en un formato estructurado.</li><li><b>Bloqueo temporal:</b> que suspendamos su tratamiento mientras se resuelve una solicitud.</li></ul><p>Escríbenos a <a class="link" href="mailto:${SITE.email}">${SITE.email}</a> indicando tu nombre y qué necesitas. Responderemos dentro de los plazos legales. Si sientes que no atendimos bien tu solicitud, puedes recurrir a la Agencia de Protección de Datos Personales.</p>`],
+    ['8. Novedades por correo', `<p>Solo te escribimos si te suscribiste. Cada correo incluye una forma sencilla de darte de baja, y también puedes pedirlo escribiéndonos. Tu baja se aplica sin costo.</p>`],
+    ['9. Cookies y almacenamiento local', `<p>Usamos almacenamiento local de tu navegador para recordar tu bolsa de compras y mantener el sitio funcionando. Si en el futuro incorporamos cookies de análisis o publicidad, te lo informaremos y te pediremos tu consentimiento. Puedes borrar estos datos desde la configuración de tu navegador.</p>`],
+    ['10. Seguridad', `<p>Aplicamos medidas técnicas y organizativas razonables para proteger tus datos contra acceso no autorizado, pérdida o alteración. Ningún sistema es infalible, pero trabajamos para reducir los riesgos.</p>`],
+    ['11. Menores de edad', `<p>Este sitio no está dirigido a menores de 14 años y no recopilamos sus datos de forma deliberada. Si crees que un menor nos entregó datos sin autorización de su madre, padre o tutor, escríbenos y los eliminaremos.</p>`],
+    ['12. Cambios a esta política', `<p>Podemos actualizar esta política, por ejemplo por cambios en la ley. Publicaremos la versión vigente en esta página con su fecha de actualización.</p>`],
+  ];
+  const body = `<div class="wrap wrap--narrow">${crumbs([{ label: 'Inicio', href: 'index.html' }, { label: 'Política de privacidad' }])}
+  <header class="page-title" style="padding-inline:0"><span class="label label--accent">Legal</span><h1>Política de privacidad</h1><p class="lead">Cómo cuidamos tus datos personales. Última actualización: 14 de octubre de 2026.</p></header>
+  <div class="legal">${S.map(([t, c]) => `<section><h2>${t}</h2>${c}</section>`).join('')}</div></div>`;
+  return page({ title: 'Política de privacidad', desc: 'Cómo Sagrada Indumentaria trata y protege tus datos personales.', page: 'privacy', active: '', body });
 }

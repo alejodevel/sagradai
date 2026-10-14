@@ -24,7 +24,7 @@
   function render() {
     var it = items(), box = $('#co-items'), sub = it.reduce(function (s, p) { return s + p.price; }, 0), ship = shipCost();
     if (!it.length) { box.innerHTML = '<p class="muted">Tu bolsa está vacía. <a class="link" href="tienda.html">Volver a la tienda</a>.</p>'; $('#co-pay').disabled = true; }
-    else { $('#co-pay').disabled = false; box.innerHTML = it.map(function (p) { return '<div class="cart-item"><div class="media">' + (p.virtual ? '<div class="iso-ph"><img src="assets/brand/isotipo/isotipo-blanco.svg" alt="" width="60" height="60"></div>' : '<img src="' + p.thumb + '" alt="" width="160" height="200" style="object-position:' + p.fp + '">') + '</div><div><h4>' + p.title + '</h4><p class="label muted">' + p.lineName + '</p></div><div class="tnum">' + U.money(p.price) + '</div></div>'; }).join(''); }
+    else { $('#co-pay').disabled = false; box.innerHTML = it.map(function (p) { return '<div class="cart-item"><div class="media">' + (p.virtual ? '<div class="iso-ph"><img src="assets/brand/isotipo/isotipo-blanco.png" alt="" width="60" height="60"></div>' : '<img src="' + p.thumb + '" alt="" width="160" height="200" style="object-position:' + p.fp + '">') + '</div><div><h4>' + p.title + '</h4><p class="label muted">' + p.lineName + '</p></div><div class="tnum">' + U.money(p.price) + '</div></div>'; }).join(''); }
     var v = onlyVirtual();
     $('#ship-block').hidden = v; $('#virtual-note').hidden = !v;
     $('#co-sub').textContent = U.money(sub); $('#co-ship').textContent = v ? 'No aplica' : (ship ? U.money(ship) : 'Gratis'); $('#co-total').textContent = U.money(sub + ship);

@@ -23,7 +23,7 @@
       if (foot) foot.hidden = true; return;
     }
     body.innerHTML = ps.map(function (p) {
-      var thumb = p.virtual ? '<div class="media"><div class="iso-ph"><img src="assets/brand/isotipo/isotipo-blanco.svg" alt="" width="60" height="60"></div></div>'
+      var thumb = p.virtual ? '<div class="media"><div class="iso-ph"><img src="assets/brand/isotipo/isotipo-blanco.png" alt="" width="60" height="60"></div></div>'
         : '<div class="media"><img src="' + p.thumb + '" alt="" width="160" height="200" style="object-position:' + p.fp + '"></div>';
       return '<div class="cart-item"><a href="' + p.url + '">' + thumb + '</a><div><h4><a href="' + p.url + '">' + p.title + '</a></h4><p class="label muted">' + p.lineName + '</p>' +
         '<button class="rm" data-rm="' + p.id + '" type="button">Quitar</button></div><div class="tnum">' + U.money(p.price) + '</div></div>';
@@ -64,7 +64,7 @@
       var q = norm(si.value.trim()); if (q.length < 2) { sr.innerHTML = ''; return; }
       var r = DATA.products.filter(function (p) { return norm(p.title + ' ' + p.lineName + ' ' + p.catName).indexOf(q) > -1; }).slice(0, 8);
       sr.innerHTML = r.length ? r.map(function (p) {
-        return '<a href="' + p.url + '"><span class="media" style="--ar:4/5">' + (p.virtual ? '<span class="iso-ph"><img src="assets/brand/isotipo/isotipo-blanco.svg" alt="" width="40" height="40"></span>' : '<img src="' + p.thumb + '" alt="" width="56" height="70" style="object-position:' + p.fp + '">') + '</span><span>' + p.title + '<br><span class="label muted">' + p.lineName + (p.sold ? ' · Ya tiene dueña' : '') + '</span></span><span class="tnum">' + U.money(p.price) + '</span></a>';
+        return '<a href="' + p.url + '"><span class="media" style="--ar:4/5">' + (p.virtual ? '<span class="iso-ph"><img src="assets/brand/isotipo/isotipo-blanco.png" alt="" width="40" height="40"></span>' : '<img src="' + p.thumb + '" alt="" width="56" height="70" style="object-position:' + p.fp + '">') + '</span><span>' + p.title + '<br><span class="label muted">' + p.lineName + (p.sold ? ' · Ya tiene dueña' : '') + '</span></span><span class="tnum">' + U.money(p.price) + '</span></a>';
       }).join('') : '<p class="muted">No encontramos nada con ese nombre. Prueba con "abrigo", "cuero" o "vestido".</p>';
     });
   }

@@ -29,6 +29,7 @@ out('journal.html', P.journal());
 for (const po of POSTS) out(`journal-${po.slug}.html`, P.article(po));
 out('sagrada.html', P.about());
 out('contacto.html', P.contact());
+out('politica-de-privacidad.html', P.privacy());
 out('preguntas-frecuentes.html', P.faq());
 out('bolsa.html', P.bag());
 out('checkout.html', P.checkout());

@@ -3,7 +3,7 @@
 // fp = punto focal (x% y%) para que el recorte nunca corte lo importante.
 
 export const LINES = {
-  'vintage':   { name: 'Vintage',   slug: 'tienda-vintage',   short: 'Piezas de otra época que hoy se ven más actuales que nunca.' },
+  'vintage':   { name: 'Vintage & Pre-loved',   slug: 'tienda-vintage',   short: 'Piezas de otra época que hoy se ven más actuales que nunca.' },
   'lujo': { name: 'Lujo', slug: 'tienda-lujo', short: 'Lujo y marcas de siempre, usadas con cariño y listas para otra vida.' },
   'upcycling': { name: 'Upcycling', slug: 'tienda-upcycling', short: 'Prendas reconstruidas en nuestro taller de sastrería. Edición única.' },
 };

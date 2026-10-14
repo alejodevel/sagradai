@@ -8,7 +8,7 @@ export const SITE = {
 };
 export const NAV = [
   { label: 'Tienda',    href: 'tienda.html', id: 'tienda' },
-  { label: 'Vintage',   href: 'tienda-vintage.html', id: 'vintage' },
+  { label: 'Vintage &amp; Pre-loved', href: 'tienda-vintage.html', id: 'vintage' },
   { label: 'Lujo', href: 'tienda-lujo.html', id: 'lujo' },
   { label: 'Upcycling', href: 'tienda-upcycling.html', id: 'upcycling', flag: 'Sastrería' },
   { label: 'Asesoría',  href: 'asesoria-personalizada.html', id: 'asesoria' },

@@ -135,6 +135,10 @@ export function overlays() {
 <div class="toast" id="toast" role="status" aria-live="polite"></div>`;
 }
 
+export function consent() {
+  return `<p class="consent">Al suscribirte aceptas recibir correos con novedades y promociones de Sagrada. Puedes darte de baja cuando quieras. Tratamos tus datos según nuestra <a href="politica-de-privacidad.html">política de privacidad</a>.</p>`;
+}
+
 export function footer() {
   return `<footer class="footer on-dark">
   <div class="wrap wrap--wide">
@@ -145,12 +149,13 @@ export function footer() {
         <p class="muted" style="font-size:14px">Una vez a la semana, las piezas nuevas. Cuando salen, se van rápido.</p>
         <form data-demo aria-label="Newsletter" novalidate><label class="sr-only" for="nl">Tu correo</label><input id="nl" type="email" required placeholder="Tu correo" autocomplete="email"><button type="submit">Quiero</button></form>
         <p class="form-ok" data-demo-ok hidden tabindex="-1" style="margin-top:12px;color:var(--c-black)">Listo. Revisa tu correo para confirmar.</p>
+        ${consent()}
       </div>
       <div class="footer__cols">
         <div><h4>Tienda</h4><ul>
-          <li><a href="tienda.html">Todo</a></li><li><a href="tienda-vintage.html">Vintage</a></li><li><a href="tienda-lujo.html">Lujo</a></li><li><a href="tienda-upcycling.html">Upcycling</a></li><li><a href="asesoria-personalizada.html">Asesoría</a></li></ul></div>
+          <li><a href="tienda.html">Todo</a></li><li><a href="tienda-vintage.html">Vintage &amp; Pre-loved</a></li><li><a href="tienda-lujo.html">Lujo</a></li><li><a href="tienda-upcycling.html">Upcycling</a></li><li><a href="asesoria-personalizada.html">Asesoría</a></li></ul></div>
         <div><h4>Ayuda</h4><ul>
-          <li><a href="preguntas-frecuentes.html">Preguntas frecuentes</a></li><li><a href="preguntas-frecuentes.html#envios">Envíos</a></li><li><a href="preguntas-frecuentes.html#cambios">Cambios</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+          <li><a href="preguntas-frecuentes.html">Preguntas frecuentes</a></li><li><a href="preguntas-frecuentes.html#envios">Envíos</a></li><li><a href="preguntas-frecuentes.html#cambios">Cambios</a></li><li><a href="contacto.html">Contacto</a></li><li><a href="politica-de-privacidad.html">Privacidad</a></li></ul></div>
         <div><h4>Sagrada</h4><ul>
           <li><a href="sagrada.html">La marca</a></li><li><a href="journal.html">Blog</a></li><li><a href="${SITE.igUrl}" target="_blank" rel="noopener">Instagram</a></li><li><a href="mailto:${SITE.email}">${SITE.email}</a></li></ul></div>
       </div>
