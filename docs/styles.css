@@ -600,7 +600,6 @@
   .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px 12px; }
   @media (min-width: 700px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 56px 20px; } }
   @media (min-width: 1100px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 64px 24px; } }
-  .grid--3 { }
   @media (min-width: 1100px) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
   .shop-empty { padding: 64px 0; text-align: center; display: none; justify-items: center; gap: 16px; }
   .shop-empty.is-on { display: grid; }
